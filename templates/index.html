@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF to CSV Converter</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>PDF to CSV Converter</h1>
+      <form method="post" action="/upload" enctype="multipart/form-data">
+        <div class="upload-btn-wrapper">
+          <button class="btn" type="button">Select PDF files</button>
+          <input type="file" name="pdf_files[]" multiple id="pdf-input" />
+          <span id="file-chosen">No files chosen</span>
+        </div>
+        <button type="submit" class="submit-btn">Convert to CSV</button>
+      </form>
+    </div>
+
+
+    <script>
+      const input = document.getElementById("pdf-input");
+      const fileChosen = document.getElementById("file-chosen");
+
+      input.addEventListener("change", function () {
+        fileNames = [];
+        for (let i = 0; i < input.files.length; i++) {
+          fileNames.push(input.files[i].name);
+        }
+        fileChosen.innerHTML = fileNames.join("<br>");
+      });
+    </script>
+  </body>
+</html>
